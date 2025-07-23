@@ -1,6 +1,6 @@
 # Excel & Power BI Project: Which Real Estate Assets are of most Interest to Investors in Mumbai?
 
-![Introductory GIF](images\intro_gif.gif)
+![Introductory GIF](images/intro_gif.gif)
 
 ## Introduction
 
@@ -61,25 +61,25 @@ Firstly, I used Power Query to extract the original data (`mumbai_house_data.csv
 ### Transformation
 Then, I realized that the dataset contained the following two columns:
 
-![Power Query before Transforming Price](images\transforming_price_before.JPG)
+![Power Query before Transforming Price](images/transforming_price_before.JPG)
 
 `Cr` stands for *Crore*, which means ten million (10,000,000) in Indian; while `L` stands for *Lakh*, which means one hundred thousand (100,000) in Indian. So I needed to add a conditional column to express the price (in rupees) properly. For this finality, I applied the following code in M language to mutiply by 10,000,000 or 100,000, depending on the case:
 
 ```
 = Table.AddColumn(#"Changed Variable Types", "price_adjusted", each if [price_unit] = "Cr" then [price]*Number.Power(10, 7) else [price]*Number.Power(10, 5), type number)
 ```
-![List of Applied Steps in Power Query](images\applied_steps_power_query.JPG)
+![List of Applied Steps in Power Query](images/applied_steps_power_query.JPG)
 
 As a result, I obtained a new column, `price_adjusted`, and I was able to delete the previous two columns.
 
-![Power Query after Transforming Price](images\transforming_price_after.JPG)
+![Power Query after Transforming Price](images/transforming_price_after.JPG)
 
 ## Skill 2: Pivot Table
 Once I loaded the transformed data, I created a pivot table to group it by localities and compute the average price. Subsequently, I filtered the data making a Top 20 and a Bottom 20 of these localities by price.
 
-![Table with the Top 20 most expensive localities](images\Top_20_most_expensive_localities.JPG)
+![Table with the Top 20 most expensive localities](images/Top_20_most_expensive_localities.JPG)
 
-![Table with the Top 20 most affordable localities](images\Top_20_most_affordable_localities.JPG)
+![Table with the Top 20 most affordable localities](images/Top_20_most_affordable_localities.JPG)
 
 ## Skill 3: Power Query and Graphs in Power BI
 In order to obtain insights for this data, it was convenient to use the map charts from Power BI. I used the same steps in the Power Query editor of Power BI as in the one of Excel for the `mumbai_house_data.csv`.
@@ -89,11 +89,11 @@ The first time I wanted to insert map charts, I ended up with this:
 
 It is obvious that there is a lot of points that are really for away from Mumbai.
 
-![Map Chart in Power BI with low geographic precision](images\geographic_precision_error_1.JPG)
+![Map Chart in Power BI with low geographic precision](images/geographic_precision_error_1.JPG)
 
 To try to add more precision to the localitions, I added a new column in Power Query which was the union between the column `locality`, `region` and the sufix ", Mumbai, Maharashtra, India". Despite the improvement on the map, I still had nuisances like this one:
 
-![Map Chart in Power BI with mid geographic precision](images\fix_nuisance.png)
+![Map Chart in Power BI with mid geographic precision](images/fix_nuisance.png)
 
 In order to fix it once and for all, I used lattitude and longitude coordinates at the beginning of the localities for all the remaining anomalies. The code of the added column ended up being something like this:
 
@@ -103,13 +103,13 @@ In order to fix it once and for all, I used lattitude and longitude coordinates 
 
 I finally added a slicer to filter the locations based on the average price. 
 
-![Map Chart in Power BI with high geographic precision](images\final_localities_map_chart.JPG)
+![Map Chart in Power BI with high geographic precision](images/final_localities_map_chart.JPG)
 
 ## Analysis
 
 As you can see in the pictures below, the Bottom Region (Mumbai Center) shares both the most affordable and expensive propeties, even though the latters are slightly located in the coast zone. In what concerns the valuable houses, Bandra is the region in Mumbai with the most concentration. On the other hand, their opposites are more scattered among Mumbai, specially in the outskirts of the city.
 
-![Locations of the most expensive and most affordable houses in Mumbai](images\affordable_and_expensive_houses_location.JPG)
+![Locations of the most expensive and most affordable houses in Mumbai](images/affordable_and_expensive_houses_location.JPG)
 
 # What are the most profitable real state investments?
 
@@ -119,7 +119,7 @@ To find the "hidden gems" among Mumbai, I took into account two crucial attribut
 
 To implement that measure, I added the data set to the Data Model, loaded into Power Pivot and typed the following *explicit measure*: 
 
-![Adding the dataset to Power Pivot](images\add_data_model.JPG)
+![Adding the dataset to Power Pivot](images/add_data_model.JPG)
 
 DAX explicit measure: `=DIVIDE([Average of expected_roi(%)]; [Average of market_volatility_score];0)`
 
@@ -127,7 +127,7 @@ DAX explicit measure: `=DIVIDE([Average of expected_roi(%)]; [Average of market_
 
 Considering the fact that a investor prefers an asset that offers the same profitability with the lowest volatility, I filtered the data for that houses that have a volatility smaller or equal that 2.5 (out of 10, which is the highest possible). As a result, I obtained this list of the most benefitial real state investments:
 
-![Most profitable properties to invest](images\most_profitable_properties.JPG)
+![Most profitable properties to invest](images/most_profitable_properties.JPG)
 
 To confirm my decision, I compared the results with their associated liquidity (ease of being sold) and all of them present values higher than 8 (out of 10, which is the highest possible). This means that they are likely to be sold without difficulties in the future.
 
@@ -137,7 +137,7 @@ To confirm my decision, I compared the results with their associated liquidity (
 
 Within the Pivot Table, I used "type" as the Parent Category and number of rooms for the Descendant Category. Finally, I inserted a combined chart to visualize both price and demand and a filter for each of the two previous categories.
 
-![Bar Chart of Price and Demand for every House Type](images\demand_price_type_relation.JPG)
+![Bar Chart of Price and Demand for every House Type](images/demand_price_type_relation.JPG)
 
 ## Analysis
 
@@ -151,7 +151,7 @@ Additionally, despite the uniformity of the data in apartments, the ones which h
 
 Similarly to the previous question, I used hierarchies in a Pivot Table, but now with age (new, resale or unknown) as the Parent Category and status (ready to move or under construction) as the Descendant Category. Analogously, I inserted a bar chart to visualize both price and demand. It is important to mention that I did not included the ages of houses which are `unknown` in order to not interfere with the analysis.
 
-![Bar Chart of Price and Demand for every known Status and Age of every House](images\demand_price_status_relation.JPG)
+![Bar Chart of Price and Demand for every known Status and Age of every House](images/demand_price_status_relation.JPG)
 
 ## Analysis
 
@@ -169,7 +169,7 @@ To calculate the price in rupees of a square feet of a property in each region, 
 
 In order to obtain insights for this data, it was convenient to use the map charts from Power BI. Firstly, I imported the worksheet I was using Excel to answer the question of this section, which consisted of the columns `Region`, `Price-to-area Ratio (rupees)`, `AVG Price (rupees)` and `AVG area (sq. ft.)`. Secondly, I added for each `Region` the sufix ", Mumbai, Maharashtra, India"
 
-![Applied Steps in Power Query of Power BI](images\applied_steps_power_query_power_bi.JPG)
+![Applied Steps in Power Query of Power BI](images/applied_steps_power_query_power_bi.JPG)
 
 Finally, I inserted a map and bar chart and slicers to filter depending on the average price and the region of interest.
 
@@ -179,7 +179,7 @@ Approximately, the 8% of the regions in Mumbai have a price above the 40,000 rup
 
 Filtering via Power BI the amount of the price per square feet above the 40,000 rupees, one obtains the following locations in the map chart:
 
-![Dashboard Power BI of Price per Square Feet and Region](images\dashboard_power_bi.JPG)
+![Dashboard Power BI of Price per Square Feet and Region](images/dashboard_power_bi.JPG)
 
 Now it is more notable that this 8% of regions are located in the coast of Mumbai, which also matches with the locations of the most expensive properties.
 
