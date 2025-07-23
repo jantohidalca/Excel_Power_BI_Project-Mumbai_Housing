@@ -39,7 +39,7 @@ You can feel free to use the same files as me here below:
 
 ### Mumbai Housing Prices Dataset
 
-The dataset used for this project contains real-world housing prices in Mumbai from June 2025. It comes from [Kaggle](https://www.kaggle.com/datasets/tilakjain/mumbai-house-data?resource=download). Both this project and the dataset are covered by the [MIT license](https://www.mit.edu/~amini/LICENSE.md).
+The dataset used for this project contains real-world housing prices in Mumbai from June 2025. It comes from [Kaggle](https://www.kaggle.com/datasets/tilakjain/mumbai-house-data?resource=download). Both this project and the dataset are covered by the [MIT license](LICENSE.md).
 
 Overall, it includes detailed information of a huge number of houses:
 
