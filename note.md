@@ -1,0 +1,1 @@
+Make sure to *Enable Content* for the external data if you want to open the Excel and Power BI files of my project. Also do not forget to *Change Source* and select the direction of the downloaded dataset in your computer.
